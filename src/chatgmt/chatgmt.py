@@ -52,7 +52,7 @@ app.layout = dmc.MantineProvider(
                                     m="xs",
                                     p="xs",
                                     h=70,
-#                                    src=app.get_asset_url(settings.LOGO_FILE),
+                                    # src=app.get_asset_url(settings.LOGO_FILE),
                                 )
                             ]
                         )

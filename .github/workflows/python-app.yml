@@ -1,0 +1,39 @@
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install uv and set up Python ${{ matrix.python-version }}
+      uses: astral-sh/setup-uv@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        enable-cache: true  # Enables caching to speed up subsequent runs
+
+    - name: Install project dependencies
+      run: uv sync --all-extras --dev
+
+    - name: Lint with flake8
+      run: uv run flake8 ./zugvogel --verbose --count --show-source --statistics
+
+    - name: Run mypy
+      run: uv run mypy ./zugvogel
+
+    - name: Test with pytest
+      run: uv run pytest
