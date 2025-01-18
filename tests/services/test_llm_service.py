@@ -1,4 +1,3 @@
-import pytest
 from unittest.mock import MagicMock, patch
 
 from chatgmt.services.llm_service import handle_thread
@@ -32,6 +31,7 @@ def test_handle_thread_error():
 
             error_message = "Simulated error"
             mock_handle_assistants.side_effect = RuntimeError(error_message)
+            mock_extract_reply.side_effect = RuntimeError(error_message)
 
             reply = handle_thread("Hello, World!")
 
