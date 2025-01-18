@@ -1,3 +1,4 @@
+import pytest
 from unittest.mock import MagicMock, patch
 
 from chatgmt.services.llm_service import handle_thread
@@ -21,3 +22,17 @@ def test_handle_thread():
                 mock_reply_handle_assistants
             )
             assert reply == mock_reply_extract_reply
+
+
+def test_handle_thread_error():
+    with patch("chatgmt.services.llm_service.handle_assistants") \
+            as mock_handle_assistants:
+        with patch("chatgmt.services.llm_service.extract_reply") \
+                as mock_extract_reply:
+
+            error_message = "Simulated error"
+            mock_handle_assistants.side_effect = RuntimeError(error_message)
+
+            reply = handle_thread("Hello, World!")
+
+            assert reply == f"An unexpected error occurred: {error_message}"
