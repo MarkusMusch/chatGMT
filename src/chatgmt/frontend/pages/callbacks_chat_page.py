@@ -3,6 +3,7 @@ from dash import callback, Input, no_update, Output, State  # type: ignore
 from typing import Any, Tuple
 
 from chatgmt.frontend.components.components_id_tree import ComponentIdTree
+from chatgmt.services.llm_service import handle_thread
 
 
 @callback(
@@ -31,6 +32,7 @@ def send_message(
         The message to send to the LLM.
     """
     if input:
-        return input, None, ""
+        output = handle_thread(input=input)
+        return output, None, ""
     else:
         return no_update, "Please enter a message", ""

@@ -84,7 +84,6 @@ source = { editable = "." }
 dependencies = [
     { name = "dash" },
     { name = "dash-mantine-components" },
-    { name = "mypy" },
     { name = "openai" },
     { name = "pydantic-settings" },
 ]
@@ -100,7 +99,6 @@ dev = [
 requires-dist = [
     { name = "dash", specifier = ">=2.18.2" },
     { name = "dash-mantine-components", specifier = ">=0.15.1" },
-    { name = "mypy", specifier = ">=1.14.1" },
     { name = "openai", specifier = ">=1.59.6" },
     { name = "pydantic-settings", specifier = ">=2.7.1" },
 ]

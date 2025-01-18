@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     HOST: str = "0.0.0.0"
     PORT: int = 8000
 
+    ASSISTANT_ID: str
+    # API Keys
+    OPENAI_API_KEY: str
+
     DEBUG_MODE: bool = False
 
     model_config = SettingsConfigDict(case_sensitive=True)

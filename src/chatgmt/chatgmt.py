@@ -59,7 +59,7 @@ app.layout = dmc.MantineProvider(
                     ]
                 ),
                 dmc.AppShellMain(
-                    ml=200,
+                    # ml=200,
                     children=[
                         page_container
                     ]
