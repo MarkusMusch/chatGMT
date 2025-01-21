@@ -4,13 +4,18 @@ import importlib.resources
 from dash import (  # type: ignore
     Dash,
     _dash_renderer,
+    dcc,
     page_container
 )
 import dash_mantine_components as dmc  # type: ignore
+from openai import OpenAI
 
 # This module is not used explicitly but is imported to register the callbacks
 from chatgmt.settings import settings
 from chatgmt.frontend.components.components_id_tree import ComponentIdTree
+
+client = OpenAI()
+thread = client.beta.threads.create()
 
 _dash_renderer._set_react_version("18.2.0")
 
@@ -32,6 +37,13 @@ app.layout = dmc.MantineProvider(
         "colorScheme": "light",
     },
     children=[
+        dcc.Store(
+            id=ComponentIdTree.App.AppIds.STORE,
+            data={
+                "thread_id": thread.id,
+                "assistant_id": settings.ASSISTANT_ID
+            }
+        ),
         dmc.AppShell(
             header={"height": 70},
             p="md",
@@ -59,7 +71,7 @@ app.layout = dmc.MantineProvider(
                     ]
                 ),
                 dmc.AppShellMain(
-                    ml=200,
+                    # ml=200,
                     children=[
                         page_container
                     ]
