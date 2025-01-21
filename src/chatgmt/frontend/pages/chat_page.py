@@ -7,7 +7,6 @@ import dash_mantine_components as dmc  # type: ignore
 
 from chatgmt.frontend.components.components_id_tree import ComponentIdTree
 from chatgmt.services.llm_service import handle_thread
-from chatgmt.frontend.components.components_id_tree import ComponentIdTree
 
 dash.register_page(__name__)
 

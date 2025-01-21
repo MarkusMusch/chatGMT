@@ -16,7 +16,9 @@ def extract_reply(messages: SyncCursorPage[Message]) -> str:
     Returns:
         str: The reply message.
     """
-    if isinstance(messages.data[0].content[0], TextContentBlock):  # type: ignore
+    if isinstance(  # type: ignore
+        messages.data[0].content[0], TextContentBlock
+    ):
         reply = messages.data[0].content[0].text.value  # type: ignore
     else:
         reply = "Error getting reply from LLM."
