@@ -11,6 +11,7 @@ class ComponentIdTree():
         class AppIds(str, Enum):
             """ This class contains the ids of the app """
             MANTINE_PROVIDER = 'mantine-provider'
+            STORE = 'store'
 
         class ChatIds(str, Enum):
             """ This class contains the ids of the chat component """

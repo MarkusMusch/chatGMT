@@ -14,9 +14,17 @@ def test_handle_thread():
             mock_handle_assistants.return_value = mock_reply_handle_assistants
             mock_extract_reply.return_value = mock_reply_extract_reply
 
-            reply = handle_thread("Hello, World!")
+            reply = handle_thread(
+                "Hello, World!",
+                "123",
+                "456"
+            )
 
-            mock_handle_assistants.assert_called_once_with("Hello, World!")
+            mock_handle_assistants.assert_called_once_with(
+                "Hello, World!",
+                "123",
+                "456"
+            )
             mock_extract_reply.assert_called_once_with(
                 mock_reply_handle_assistants
             )
@@ -33,6 +41,10 @@ def test_handle_thread_error():
             mock_handle_assistants.side_effect = RuntimeError(error_message)
             mock_extract_reply.side_effect = RuntimeError(error_message)
 
-            reply = handle_thread("Hello, World!")
+            reply = handle_thread(
+                "Hello, World!",
+                "123",
+                "456",
+            )
 
             assert reply == f"An unexpected error occurred: {error_message}"
